@@ -13,13 +13,34 @@
 
     <title>Auto Complete</title>
 
+    <%--Alteração da localização do script para o rodapé--%>
+
+    <%--2º commit--%>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <asp:HiddenField ID="hfCustomerId" runat="server" />
+                    FILTRO:
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+                <br />
+                <div class="col-md-2">
+                    <asp:Button ID="btnEnviar" Text="Enviar" runat="server" OnClick="Submit" />
+                </div>
+            </div>
+        </div>
+    </form>
 
     <script type="text/javascript">
-    $(function () {
-        $("[id$=txtSearch]").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '<%=ResolveUrl("~/index.aspx/GetCustomers") %>',
+        $(function () {
+            $("[id$=txtSearch]").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '<%=ResolveUrl("~/index.aspx/GetCustomers") %>',
                     data: "{ 'prefix': '" + request.term + "'}",
                     dataType: "json",
                     type: "POST",
@@ -45,25 +66,8 @@
             },
             minLength: 1
         });
-    });  
+    });
 </script>
 
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <asp:HiddenField ID="hfCustomerId" runat="server" />
-                    FILTRO:
-                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control"></asp:TextBox>
-                </div>
-                <br />
-                <div class="col-md-2">
-                    <asp:Button ID="btnEnviar" Text="Enviar" runat="server" OnClick="Submit" />
-                </div>
-            </div>
-        </div>
-    </form>
 </body>
 </html>
